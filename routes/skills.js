@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+//Require the controller that exports Skills CRUD functions
+const skillsCtrl = require('../controllers/skills');
+const skills = require('../models/skill')
+const allSkills = skills.getAll();
+
+//All actual paths start with "/todos"
+
+//GET /skills
+router.get('/', function (req, res, next) {
+   res.render('skills/index.ejs', {skills: allSkills});
 });
-
 module.exports = router;

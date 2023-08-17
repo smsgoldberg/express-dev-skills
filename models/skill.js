@@ -6,7 +6,8 @@ const skills = [
 
 module.exports = {
     getAll, 
-    getOne
+    getOne,
+    create
 }
 
 function getAll() {
@@ -20,3 +21,18 @@ function getOne(id) {
     //ideal for finding objects within an array
     return skills.find(skill => skill.id === id);
 }
+
+function create(skill) {
+    skill.id = Date.now() % 1000000;
+    skill.level = '';
+    skill.easy = false;
+    skills.push(skill);
+}
+
+function deleteOne(id) {
+    //All properties attached to req.params are strings!
+    id = parseInt(id);
+    //Find the index based on the id of the todo object
+    const idx = skills.findIndex(skill => skill.id === id);
+    skills.splice(idx, 1);
+  }
